@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>SwiftEats | Premium Food Delivery - Fiverr Level</title>
+  <!-- Bootstrap 5 CSS + Font Awesome + Google Fonts + AOS + GSAP -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #ffffff;
+      color: #1F2937;
+      overflow-x: hidden;
+    }
+    
+    /* Custom Animations */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0px); }
+    }
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 0 0 rgba(249,115,22,0.4); }
+      70% { box-shadow: 0 0 0 15px rgba(249,115,22,0); }
+      100% { box-shadow: 0 0 0 0 rgba(249,115,22,0); }
+    }
+    .animate-float {
+      animation: float 4s ease-in-out infinite;
+    }
+    
+    /* Navbar */
+    .navbar {
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.05);
+      padding: 15px 0;
+      transition: all 0.3s;
+    }
+    .navbar.scrolled {
+      padding: 10px 0;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    }
+    .navbar-brand {
+      font-size: 28px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #F97316, #EA580C);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .navbar-brand i { color: #F97316; margin-right: 8px; }
+    .nav-link {
+      font-weight: 600;
+      color: #374151 !important;
+      transition: 0.3s;
+      margin: 0 5px;
+    }
+    .nav-link:hover, .nav-link.active { color: #F97316 !important; transform: translateY(-2px); }
+    .btn-outline-orange {
+      border: 1.5px solid #F97316;
+      background: transparent;
+      color: #F97316;
+      border-radius: 50px;
+      padding: 8px 24px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    .btn-outline-orange:hover { background: #F97316; color: white; transform: scale(1.05); }
+    .btn-orange {
+      background: #F97316;
+      color: white;
+      border: none;
+      padding: 12px 32px;
+      border-radius: 50px;
+      font-weight: 700;
+      transition: 0.3s;
+      box-shadow: 0 8px 20px rgba(249, 115, 22, 0.3);
+    }
+    .btn-orange:hover { background: #EA580C; transform: translateY(-3px); box-shadow: 0 15px 30px rgba(234, 88, 12, 0.4); }
+    
+    /* Hero */
+    .hero-section {
+      padding: 100px 0 60px;
+      background: linear-gradient(135deg, #FFF9F5 0%, #FFFFFF 100%);
+    }
+    .hero-title { font-size: 3.5rem; font-weight: 800; line-height: 1.2; }
+    .hero-highlight { color: #F97316; border-bottom: 3px solid #FDE68A; }
+    .hero-stats { display: flex; gap: 30px; margin-top: 35px; }
+    .stat-number { font-size: 1.8rem; font-weight: 800; color: #F97316; }
+    .hero-img { border-radius: 40px; box-shadow: 0 30px 40px -20px rgba(0,0,0,0.25); }
+    
+    /* Feature Cards */
+    .feature-card {
+      background: white;
+      padding: 35px 25px;
+      border-radius: 28px;
+      text-align: center;
+      transition: all 0.4s;
+      border: 1px solid #FFEDD5;
+      height: 100%;
+    }
+    .feature-card:hover { transform: translateY(-12px); border-color: #F97316; box-shadow: 0 25px 35px -12px rgba(249,115,22,0.2); }
+    .feature-icon { font-size: 55px; color: #F97316; margin-bottom: 20px; }
+    
+    /* Dish Cards */
+    .dish-card {
+      background: white;
+      border-radius: 28px;
+      overflow: hidden;
+      transition: all 0.4s;
+      border: 1px solid #FEE2E2;
+      height: 100%;
+      cursor: pointer;
+    }
+    .dish-card:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 30px 40px -12px rgba(0,0,0,0.2); }
+    .dish-img { height: 220px; background-size: cover; background-position: center; transition: transform 0.5s; }
+    .dish-card:hover .dish-img { transform: scale(1.05); }
+    .price-tag { color: #F97316; font-size: 1.4rem; font-weight: 800; }
+    .order-btn-sm {
+      background: #FFF7ED;
+      border: none;
+      padding: 10px;
+      border-radius: 50px;
+      font-weight: 700;
+      color: #F97316;
+      width: 100%;
+      transition: 0.3s;
+    }
+    .order-btn-sm:hover { background: #F97316; color: white; }
+    
+    /* How It Works Section */
+    .how-section {
+      background: linear-gradient(135deg, #0F172A, #1E293B);
+      border-radius: 60px;
+      padding: 70px 0;
+      margin: 50px 0;
+    }
+    .step-circle {
+      background: #F97316;
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-size: 2rem;
+      font-weight: 800;
+      margin: 0 auto 20px;
+      box-shadow: 0 0 0 5px rgba(249,115,22,0.3);
+      transition: 0.3s;
+    }
+    .step-card:hover .step-circle { transform: scale(1.1) rotate(5deg); }
+    
+    /* FAQ Section */
+    .faq-section {
+      background: #FEF9F4;
+      border-radius: 60px;
+      padding: 60px;
+      margin: 50px 0;
+    }
+    .faq-item {
+      background: white;
+      border-radius: 20px;
+      padding: 20px 25px;
+      margin-bottom: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+      border: 1px solid #FFE4CC;
+    }
+    .faq-item:hover { transform: translateX(5px); border-color: #F97316; }
+    .faq-question { font-weight: 700; font-size: 1.1rem; display: flex; justify-content: space-between; align-items: center; }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; color: #6B7280; margin-top: 0; }
+    .faq-item.active .faq-answer { max-height: 200px; margin-top: 15px; }
+    .faq-item.active .faq-icon { transform: rotate(180deg); }
+    .faq-icon { transition: 0.3s; color: #F97316; }
+    
+    /* Contact Section */
+    .contact-section {
+      background: white;
+      border-radius: 60px;
+      padding: 60px;
+      margin: 50px 0;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+      border: 1px solid #FFEDD5;
+    }
+    .contact-card {
+      background: #FEF9F4;
+      padding: 30px;
+      border-radius: 28px;
+      text-align: center;
+      transition: 0.3s;
+      height: 100%;
+    }
+    .contact-card:hover { transform: translateY(-5px); background: #FFF5EC; }
+    .contact-card i { font-size: 45px; color: #F97316; margin-bottom: 15px; }
+    
+    /* Testimonial Cards */
+    .testimonial-card {
+      background: #FAFAFA;
+      padding: 32px;
+      border-radius: 32px;
+      transition: 0.3s;
+      border: 1px solid #FFE4CC;
+      height: 100%;
+    }
+    .testimonial-card:hover { background: white; transform: translateY(-8px); box-shadow: 0 20px 30px -10px rgba(249,115,22,0.1); }
+    .stars { color: #FBBF24; font-size: 1.1rem; margin-bottom: 15px; }
+    .avatar-sm {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #F97316, #EA580C);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+    
+    /* CTA Section */
+    .cta-section {
+      background: linear-gradient(115deg, #FFFAF5, #FFF0E3);
+      border-radius: 60px;
+      padding: 65px 35px;
+      text-align: center;
+    }
+    
+    /* Footer */
+    footer {
+      background: #0B1120;
+      color: #9CA3AF;
+      padding: 60px 0 30px;
+      border-radius: 50px 50px 0 0;
+      margin-top: 60px;
+    }
+    .footer-link {
+      color: #9CA3AF;
+      text-decoration: none;
+      transition: 0.3s;
+      cursor: pointer;
+      display: inline-block;
+    }
+    .footer-link:hover { color: #F97316; transform: translateX(5px); }
+    .social-icon {
+      font-size: 24px;
+      margin-right: 20px;
+      transition: 0.3s;
+      cursor: pointer;
+      color: #9CA3AF;
+    }
+    .social-icon:hover { color: #F97316; transform: translateY(-5px); }
+    
+    /* Back to Top */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #F97316;
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      transition: 0.3s;
+      z-index: 999;
+      box-shadow: 0 5px 15px rgba(249,115,22,0.4);
+    }
+    .back-to-top.show { opacity: 1; }
+    .back-to-top:hover { transform: translateY(-5px); background: #EA580C; }
+    
+    /* Loader */
+    .loader-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.5s;
+    }
+    .loader {
+      width: 60px;
+      height: 60px;
+      border: 4px solid #FEF3C7;
+      border-top: 4px solid #F97316;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    
+    @media (max-width: 768px) {
+      .hero-title { font-size: 2.2rem; }
+      .hero-stats { flex-wrap: wrap; gap: 15px; }
+      .faq-section, .contact-section { padding: 30px 20px; }
+      .how-section { border-radius: 30px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Loader -->
+<div class="loader-wrapper" id="loader"><div class="loader"></div></div>
+
+<!-- Back to Top -->
+<div class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></div>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#"><i class="fas fa-utensils"></i> Swift<span style="color:#F97316;">Eats</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#menu">Menu</a></li>
+        <li class="nav-item"><a class="nav-link" href="#how-it-works">How it Works</a></li>
+        <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact-page">Contact</a></li>
+        <li class="nav-item ms-lg-3"><button class="btn-outline-orange" id="signInBtn"><i class="fas fa-user-circle"></i> Sign In</button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section id="home" class="hero-section">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6" data-aos="fade-right">
+        <div class="hero-badge bg-warning bg-opacity-25 d-inline-flex px-3 py-2 rounded-pill mb-3" style="color:#B45309;"><i class="fas fa-motorcycle me-2"></i> Free delivery on first order</div>
+        <h1 class="hero-title">Craving something? <span class="hero-highlight">Get it delivered</span> in minutes.</h1>
+        <p class="text-secondary fs-5 mb-4"><i class="fas fa-check-circle text-warning"></i> Order from 500+ top restaurants. Hot, fresh & super fast.</p>
+        <div class="d-flex gap-3 flex-wrap">
+          <button class="btn-orange" id="orderNowBtn"><i class="fas fa-shopping-bag"></i> Order Now</button>
+          <button class="btn-outline-orange" id="exploreBtn"><i class="fas fa-play"></i> Explore Menu</button>
+        </div>
+        <div class="hero-stats">
+          <div><span class="stat-number">500+</span><br><i class="fas fa-store"></i> Restaurants</div>
+          <div><span class="stat-number">15k+</span><br><i class="fas fa-smile"></i> Happy Customers</div>
+          <div><span class="stat-number">30min</span><br><i class="fas fa-clock"></i> Avg Delivery</div>
+        </div>
+      </div>
+      <div class="col-lg-6 text-center" data-aos="fade-left">
+        <img src="https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=600&h=500&fit=crop" alt="Delicious Burger" class="img-fluid hero-img animate-float">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<div class="container py-5" data-aos="fade-up">
+  <div class="text-center mb-5"><h2 class="display-5 fw-bold">Why choose <span style="color:#F97316;">SwiftEats</span>? <i class="fas fa-heart text-danger"></i></h2></div>
+  <div class="row g-4">
+    <div class="col-md-3" data-aos="fade-up" data-aos-delay="100"><div class="feature-card"><div class="feature-icon"><i class="fas fa-bolt"></i></div><h3>Lightning Fast</h3><p>Avg. 25 mins delivery</p></div></div>
+    <div class="col-md-3" data-aos="fade-up" data-aos-delay="200"><div class="feature-card"><div class="feature-icon"><i class="fas fa-map-marked-alt"></i></div><h3>Live Tracking</h3><p>Real-time GPS updates</p></div></div>
+    <div class="col-md-3" data-aos="fade-up" data-aos-delay="300"><div class="feature-card"><div class="feature-icon"><i class="fas fa-gem"></i></div><h3>Best Offers</h3><p>Daily cashback & deals</p></div></div>
+    <div class="col-md-3" data-aos="fade-up" data-aos-delay="400"><div class="feature-card"><div class="feature-icon"><i class="fas fa-utensil-spoon"></i></div><h3>100+ Cuisines</h3><p>From sushi to pizza</p></div></div>
+  </div>
+</div>
+
+<!-- Menu Section -->
+<section id="menu" class="container py-5">
+  <div class="text-center mb-5" data-aos="fade-up"><h2 class="display-5 fw-bold">🔥 Chef's Special & <span style="color:#F97316;">Popular Items</span> <i class="fas fa-fire"></i></h2></div>
+  <div class="row g-4">
+    <div class="col-md-3" data-aos="fade-up" data-aos-delay="100"><div class="dish-card"><div class="dish-img" style="background-image: url('https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?w=400&h=230&fit=crop');"></div><div class="p-3"><h4><i class="fas fa-cheese"></i> Margherita Pizza</h4><p>Classic mozzarella, basil</p><div class="price-tag">$12.99</div><button class="order-btn-sm mt-2 dishOrder" data-name="Margherita Pizza"><i class="fas fa-cart-plus"></i> Order now</button></div></div></div>
+    <div class="col-md-3" data-aos="fade-up" data-aos-delay="200"><div class="dish-card"><div class="dish-img" style="background-image: url('https://images.unsplash.com/photo-1628840042765-356cda07504e?w=400&h=230&fit=crop');"></div><div class="p-3"><h4><i class="fas fa-pizza-slice"></i> Pepperoni Feast</h4><p>Double pepperoni, extra cheese</p><div class="price-tag">$14.49</div><button class="order-btn-sm mt-2 dishOrder" data-name="Pepperoni Feast"><i class="fas fa-cart-plus"></i> Order now</button></div></div></div>
+    <div class="col-md-3" data-aos="fade-up" data-aos-delay="300"><div class="dish-card"><div class="dish-img" style="background-image: url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=230&fit=crop');"></div><div class="p-3"><h4><i class="fas fa-burger"></i> Smash Burger</h4><p>Angus beef, cheddar</p><div class="price-tag">$9.49</div><button class="order-btn-sm mt-2 dishOrder" data-name="Smash Burger"><i class="fas fa-cart-plus"></i> Order now</button></div></div></div>
+    <div class="col-md-3" data-aos="fade-up" data-aos-delay="400"><div class="dish-card"><div class="dish-img" style="background-image: url('https://images.unsplash.com/photo-1617196035154-1e7e6e28b0db?w=400&h=230&fit=crop');"></div><div class="p-3"><h4><i class="fas fa-fish"></i> California Rolls</h4><p>Fresh salmon, avocado</p><div class="price-tag">$15.90</div><button class="order-btn-sm mt-2 dishOrder" data-name="California Rolls"><i class="fas fa-cart-plus"></i> Order now</button></div></div></div>
+    <div class="col-md-3" data-aos="fade-up" data-aos-delay="500"><div class="dish-card"><div class="dish-img" style="background-image: url('https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=400&h=230&fit=crop');"></div><div class="p-3"><h4><i class="fas fa-mug-hot"></i> Fettuccine Alfredo</h4><p>Creamy parmesan sauce</p><div class="price-tag">$13.25</div><button class="order-btn-sm mt-2 dishOrder" data-name="Fettuccine Alfredo"><i class="fas fa-cart-plus"></i> Order now</button></div></div></div>
+    <div class="col-md-3" data-aos="fade-up" data-aos-delay="600"><div class="dish-card"><div class="dish-img" style="background-image: url('https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=230&fit=crop');"></div><div class="p-3"><h4><i class="fas fa-leaf"></i> Grilled Chicken Salad</h4><p>Fresh greens, avocado</p><div class="price-tag">$10.99</div><button class="order-btn-sm mt-2 dishOrder" data-name="Grilled Chicken Salad"><i class="fas fa-cart-plus"></i> Order now</button></div></div></div>
+    <div class="col-md-3" data-aos="fade-up" data-aos-delay="700"><div class="dish-card"><div class="dish-img" style="background-image: url('https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400&h=230&fit=crop');"></div><div class="p-3"><h4><i class="fas fa-candy-cane"></i> Chocolate Lava Cake</h4><p>Warm chocolate + ice cream</p><div class="price-tag">$6.99</div><button class="order-btn-sm mt-2 dishOrder" data-name="Chocolate Lava Cake"><i class="fas fa-cart-plus"></i> Order now</button></div></div></div>
+    <div class="col-md-3" data-aos="fade-up" data-aos-delay="800"><div class="dish-card"><div class="dish-img" style="background-image: url('https://images.unsplash.com/photo-1608039755401-742074f0548d?w=400&h=230&fit=crop');"></div><div class="p-3"><h4><i class="fas fa-drumstick-bite"></i> Buffalo Wings</h4><p>Spicy & tangy, ranch dip</p><div class="price-tag">$11.49</div><button class="order-btn-sm mt-2 dishOrder" data-name="Buffalo Wings"><i class="fas fa-cart-plus"></i> Order now</button></div></div></div>
+  </div>
+</section>
+
+<!-- How It Works Section -->
+<section id="how-it-works" class="container how-section" data-aos="fade-up">
+  <div class="text-center text-white mb-5"><h2 class="display-5 fw-bold">How SwiftEats <span style="color:#F97316;">Works</span> <i class="fas fa-arrow-right"></i></h2></div>
+  <div class="row text-center text-white">
+    <div class="col-md-4 step-card" data-aos="fade-up" data-aos-delay="100"><div class="step-circle"><i class="fas fa-store"></i></div><h3 class="mt-3">📍 Select Restaurant</h3><p>Browse 500+ restaurants near you</p></div>
+    <div class="col-md-4 step-card" data-aos="fade-up" data-aos-delay="200"><div class="step-circle"><i class="fas fa-credit-card"></i></div><h3 class="mt-3">🛒 Order & Pay</h3><p>Secure payment (COD/Card/UPI)</p></div>
+    <div class="col-md-4 step-card" data-aos="fade-up" data-aos-delay="300"><div class="step-circle"><i class="fas fa-biking"></i></div><h3 class="mt-3">🚚 Get Delivered</h3><p>Live tracking, hot meal at your door</p></div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<div class="container py-5" data-aos="fade-up">
+  <div class="text-center mb-5"><h2 class="display-5 fw-bold">What our <span style="color:#F97316;">foodies say</span> <i class="fas fa-star text-warning"></i></h2></div>
+  <div class="row g-4">
+    <div class="col-md-4" data-aos="fade-up" data-aos-delay="100"><div class="testimonial-card"><div class="stars">★★★★★</div><p>"SwiftEats is next level! The food arrived earlier than expected and super hot. 10/10!"</p><div class="d-flex align-items-center gap-3 mt-3"><div class="avatar-sm"><i class="fas fa-user"></i></div><div><strong>Rahul Sharma</strong><br>Verified Buyer</div></div></div></div>
+    <div class="col-md-4" data-aos="fade-up" data-aos-delay="200"><div class="testimonial-card"><div class="stars">★★★★★</div><p>"Love the UI and live tracking feature. The discounts are insane. Highly recommend!"</p><div class="d-flex align-items-center gap-3 mt-3"><div class="avatar-sm"><i class="fas fa-female"></i></div><div><strong>Sneha Mehta</strong><br>Food Critic</div></div></div></div>
+    <div class="col-md-4" data-aos="fade-up" data-aos-delay="300"><div class="testimonial-card"><div class="stars">★★★★☆</div><p>"Huge variety of restaurants, delivery partners are super polite. Will order again!"</p><div class="d-flex align-items-center gap-3 mt-3"><div class="avatar-sm"><i class="fas fa-male"></i></div><div><strong>Ankit Verma</strong><br>Regular User</div></div></div></div>
+  </div>
+</div>
+
+<!-- FAQ Section -->
+<section id="faq" class="container faq-section" data-aos="fade-up">
+  <div class="text-center mb-5"><h2 class="display-5 fw-bold">Frequently Asked <span style="color:#F97316;">Questions</span> <i class="fas fa-question-circle"></i></h2></div>
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <div class="faq-item"><div class="faq-question"><span><i class="fas fa-clock me-2 text-warning"></i> How long does delivery take?</span><i class="fas fa-chevron-down faq-icon"></i></div><div class="faq-answer">Most orders arrive within 25-35 minutes. You can track your rider in real-time through our app!</div></div>
+      <div class="faq-item"><div class="faq-question"><span><i class="fas fa-tag me-2 text-warning"></i> Is there free delivery?</span><i class="fas fa-chevron-down faq-icon"></i></div><div class="faq-answer">Yes! Free delivery on orders above $15. First order gets free delivery regardless of amount.</div></div>
+      <div class="faq-item"><div class="faq-question"><span><i class="fas fa-credit-card me-2 text-warning"></i> What payment methods are accepted?</span><i class="fas fa-chevron-down faq-icon"></i></div><div class="faq-answer">Credit/Debit cards, PayPal, Google Pay, Apple Pay, and Cash on Delivery.</div></div>
+      <div class="faq-item"><div class="faq-question"><span><i class="fas fa-undo-alt me-2 text-warning"></i> Can I cancel my order?</span><i class="fas fa-chevron-down faq-icon"></i></div><div class="faq-answer">Yes, within 2 minutes of placing the order. After that, the restaurant starts preparing your food.</div></div>
+      <div class="faq-item"><div class="faq-question"><span><i class="fas fa-headset me-2 text-warning"></i> How to contact customer support?</span><i class="fas fa-chevron-down faq-icon"></i></div><div class="faq-answer">Call us 24/7 at +1 (800) 123-FOOD or email support@swifteats.com. We reply within 2 hours.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact-page" class="container contact-section" data-aos="fade-up">
+  <div class="text-center mb-5"><h2 class="display-5 fw-bold">Get in <span style="color:#F97316;">Touch</span> <i class="fas fa-headset"></i></h2></div>
+  <div class="row g-4">
+    <div class="col-md-4" data-aos="fade-up" data-aos-delay="100"><div class="contact-card"><i class="fas fa-phone-alt"></i><h3>Call Us</h3><p>+1 (800) 123-FOOD</p><p class="text-muted">24/7 Support Available</p></div></div>
+    <div class="col-md-4" data-aos="fade-up" data-aos-delay="200"><div class="contact-card"><i class="fas fa-envelope"></i><h3>Email Us</h3><p>support@swifteats.com</p><p>careers@swifteats.com</p></div></div>
+    <div class="col-md-4" data-aos="fade-up" data-aos-delay="300"><div class="contact-card"><i class="fas fa-map-marker-alt"></i><h3>Visit Us</h3><p>123 Food Street,<br>New York, NY 10001</p></div></div>
+  </div>
+  <div class="text-center mt-5"><button class="btn-orange" id="contactBtn"><i class="fas fa-paper-plane"></i> Send us a message</button></div>
+</section>
+
+<!-- CTA Section -->
+<section id="offers" class="container my-5" data-aos="zoom-in">
+  <div class="cta-section">
+    <h2 class="display-5 fw-bold"><i class="fas fa-hamburger"></i> Hungry? Let's get <span style="color:#EA580C;">ordering!</span></h2>
+    <p class="fs-5 mt-3"><i class="fas fa-gift text-warning"></i> Download the SwiftEats app and get $5 off + free delivery on first order.</p>
+    <div class="d-flex gap-3 justify-content-center flex-wrap mt-4">
+      <button class="btn-orange" id="googlePlayBtn"><i class="fab fa-google-play"></i> Google Play</button>
+      <button class="btn-orange" id="appStoreBtn" style="background:#1F2937;"><i class="fab fa-apple"></i> App Store</button>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-4"><div class="fs-2 fw-bold" style="background:linear-gradient(135deg,#F97316,#FBBF24);-webkit-background-clip:text;background-clip:text;color:transparent;"><i class="fas fa-utensils"></i> SwiftEats</div><p>Delivering happiness <i class="fas fa-heart text-danger"></i><br>Fastest food delivery in town.</p><div><i class="fab fa-instagram social-icon"></i><i class="fab fa-twitter social-icon"></i><i class="fab fa-facebook-f social-icon"></i><i class="fab fa-youtube social-icon"></i></div></div>
+      <div class="col-md-2"><h4 class="text-white mb-3">Quick Links</h4><ul class="list-unstyled"><li><a class="footer-link" id="aboutLink">About Us</a></li><li><a class="footer-link" id="careersLink">Careers</a></li><li><a class="footer-link" id="privacyLink">Privacy Policy</a></li><li><a class="footer-link" id="termsLink">Terms</a></li></ul></div>
+      <div class="col-md-3"><h4 class="text-white mb-3">Support</h4><ul class="list-unstyled"><li><i class="fas fa-headset me-2"></i> 24/7 Customer Care</li><li><i class="fas fa-truck me-2"></i> Track Your Order</li><li><i class="fas fa-gift me-2"></i> Refer & Earn</li></ul></div>
+      <div class="col-md-3"><h4 class="text-white mb-3">Contact</h4><p><i class="fas fa-envelope me-2"></i> support@swifteats.com</p><p><i class="fas fa-phone-alt me-2"></i> +1 (800) 123-FOOD</p></div>
+    </div>
+    <hr class="mt-4"><div class="text-center"><i class="fas fa-code-branch"></i> Fiverr Premium Level — Complete Food Delivery Website | 2025 SwiftEats</div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({ duration: 800, once: true, offset: 100 });
+  
+  // Hide loader
+  window.addEventListener('load', () => { setTimeout(() => { document.getElementById('loader').style.opacity = '0'; setTimeout(() => document.getElementById('loader').style.display = 'none', 500); }, 800); });
+
+  // Toast function
+  function showToast(message, type = 'success') {
+    const toast = document.createElement('div');
+    toast.innerHTML = `<i class="fas fa-${type === 'success' ? 'check-circle' : 'bell'}"></i> ${message}`;
+    toast.style.cssText = 'position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:#0F172A;color:#fff;padding:14px 32px;border-radius:50px;font-weight:600;z-index:9999;border-left:5px solid #F97316;box-shadow:0 10px 25px rgba(0,0,0,0.2);';
+    document.body.appendChild(toast);
+    setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 400); }, 2200);
+  }
+
+  function scrollToSection(id) { document.getElementById(id).scrollIntoView({ behavior: 'smooth' }); }
+
+  // Navbar scroll effect
+  window.addEventListener('scroll', () => {
+    document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 50);
+    document.getElementById('backToTop').classList.toggle('show', window.scrollY > 300);
+  });
+  document.getElementById('backToTop').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // Navigation
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const href = link.getAttribute('href');
+      if (href && href !== '#') scrollToSection(href.substring(1));
+    });
+  });
+
+  // Buttons
+  document.getElementById('orderNowBtn')?.addEventListener('click', () => scrollToSection('menu'));
+  document.getElementById('exploreBtn')?.addEventListener('click', () => scrollToSection('menu'));
+  document.getElementById('signInBtn')?.addEventListener('click', () => showToast('🔐 Sign in for exclusive deals & offers!'));
+  document.getElementById('googlePlayBtn')?.addEventListener('click', () => showToast('📲 Google Play download coming soon!'));
+  document.getElementById('appStoreBtn')?.addEventListener('click', () => showToast('🍏 App Store download coming soon!'));
+  document.getElementById('contactBtn')?.addEventListener('click', () => showToast('📧 Our team will respond within 24 hours!'));
+
+  // Footer links
+  document.getElementById('aboutLink')?.addEventListener('click', () => showToast('⭐ SwiftEats: Fastest food delivery since 2025'));
+  document.getElementById('careersLink')?.addEventListener('click', () => showToast('💼 Join our team! Email careers@swifteats.com'));
+  document.getElementById('privacyLink')?.addEventListener('click', () => showToast('🔒 Your data is secure with SwiftEats'));
+  document.getElementById('termsLink')?.addEventListener('click', () => showToast('📜 Standard terms & conditions apply'));
+
+  // FAQ Accordion
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.addEventListener('click', () => {
+      item.classList.toggle('active');
+      document.querySelectorAll('.faq-item').forEach(other => { if (other !== item) other.classList.remove('active'); });
+    });
+  });
+
+  // Dish Order
+  document.querySelectorAll('.dishOrder').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const dishName = btn.getAttribute('data-name');
+      showToast(`✅ ${dishName} added to your cart!`);
+      btn.innerHTML = '<i class="fas fa-check"></i> Added!';
+      setTimeout(() => { btn.innerHTML = '<i class="fas fa-cart-plus"></i> Order now'; }, 1500);
+    });
+  });
+
+  // Active nav highlight
+  window.addEventListener('scroll', () => {
+    const sections = ['home', 'menu', 'how-it-works', 'faq', 'contact-page', 'offers'];
+    let current = '';
+    sections.forEach(section => {
+      const el = document.getElementById(section);
+      if (el && window.scrollY >= el.offsetTop - 150) current = section;
+    });
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === `#${current}`) link.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
