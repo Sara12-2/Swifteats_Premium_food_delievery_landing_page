@@ -1,160 +1,252 @@
 # 🍔 SwiftEats – Premium Food Delivery Landing Page
 
-A modern, fully responsive, and interactive food delivery landing page built with **HTML5, CSS3, and vanilla JavaScript**. Features live menu filtering, FAQ accordion, smooth animations, and smart CTAs — perfect for restaurant aggregators, food startups, or portfolio projects.
+A modern, fully responsive, and interactive food delivery landing page built with **HTML5, CSS3, and Vanilla JavaScript**.
 
-![Hero Section](home.png)
+SwiftEats combines a premium UI, smooth animations, menu filtering, FAQ accordions, toast notifications, and responsive layouts to deliver a realistic food-ordering experience for restaurant startups, portfolio projects, and landing pages.
+
+## 🌐 Live Demo
+
+🚀 Live Website:
+
+https://restaurant-food-delivery-website-la.vercel.app/
 
 ---
 
 ## 📸 Screenshots
 
-| Section | Preview |
-|---------|---------|
-| **Hero Section** | ![Home](home.png) |
-| **Why Choose SwiftEats** | ![Why Choose](why%20choose.png) |
-| **Menu Section** | ![Menu](menu.png) |
-| **How It Works** | ![How It Works](how%20it%20works.png) |
-| **Testimonials** | ![What Foodies Say](what%20foodies%20say.png) |
-| **FAQ Section** | ![FAQ](FAQ.png) |
-| **Contact Section** | ![Contact](contact.png) |
-| **Ordering Process** | ![Ordering](ordering.png) |
-| **Footer** | ![Footer](footer.png) |
+### Hero Section
+![Hero Section](home.png)
+
+### Why Choose SwiftEats
+![Why Choose SwiftEats](why%20choose.png)
+
+### Menu Section
+![Menu Section](menu.png)
+
+### How It Works
+![How It Works](how%20it%20works.png)
+
+### Testimonials
+![Testimonials](what%20foodies%20say.png)
+
+### FAQ Section
+![FAQ](FAQ.png)
+
+### Contact Section
+![Contact](contact.png)
+
+### Ordering Process
+![Ordering Process](ordering.png)
+
+### Footer
+![Footer](footer.png)
 
 ---
 
-## ✨ Key Features
+## ✨ Features
 
-| Feature | Description |
-|---------|-------------|
-| 🎨 **Modern UI** | Glassmorphism effects, floating cards, gradient overlays |
-| 📱 **Fully Responsive** | Works flawlessly on mobile, tablet, and desktop |
-| 🍽️ **Live Menu Filtering** | Filter dishes by category (Pizza, Burger, Sushi, etc.) |
-| ❓ **FAQ Accordion** | Expand/collapse questions with smooth animation |
-| 🛒 **Add to Cart Simulation** | Interactive buttons with toast notifications |
-| 🧭 **Smooth Scroll Nav** | Active link highlighting + sticky navbar |
-| ⏳ **Loader Animation** | Professional page load experience |
-| 🔝 **Back to Top Button** | Appears after scrolling |
-| 👁️ **Scroll Animations** | Intersection Observer for fade-in effects |
-| 📞 **Contact Section** | 3 cards with call, email, and address |
-| 🔗 **Footer Links** | Quick links, social icons, company info |
-| 📲 **App Store CTAs** | Google Play & App Store buttons |
-| 🌟 **Hero Stats** | Restaurant count, happy customers, delivery time |
-| 🏷️ **Category Tags** | Quick filters for cuisine types |
+### 🎨 Modern UI Design
+- Glassmorphism cards
+- Gradient overlays
+- Floating hero widgets
+- Premium typography
+
+### 📱 Fully Responsive
+- Desktop
+- Tablet
+- Mobile
+- Small mobile devices
+
+### 🍽️ Interactive Menu
+- Live category filtering
+- Dynamic dish cards
+- Hover effects
+
+### ❓ FAQ Accordion
+- Expand / Collapse interaction
+- Smooth transitions
+
+### 🛒 Cart Simulation
+- Add-to-cart feedback
+- Animated button state
+- Toast notifications
+
+### 🧭 Smart Navigation
+- Sticky navbar
+- Active section highlighting
+- Smooth scrolling
+
+### ⏳ Loading Experience
+- Animated loader screen
+- Smooth page reveal
+
+### 🔝 Back To Top Button
+- Appears on scroll
+- Smooth scroll behavior
+
+### ✨ Scroll Animations
+- Intersection Observer API
+- Fade-in effects
+
+### 📞 Contact Section
+- Email card
+- Phone card
+- Address card
+
+### 📲 Mobile App CTA
+- Google Play button
+- App Store button
+
+### 🌟 Hero Statistics
+- Restaurant count
+- Customer count
+- Delivery speed
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **HTML5** – Semantic structure
-- **CSS3** – Flexbox, Grid, custom properties, keyframe animations
-- **JavaScript (Vanilla ES6)** – DOM manipulation, event handling, Intersection Observer
-- **Lucide Icons** – Clean SVG icon library
-- **Google Fonts** – Bricolage Grotesque + DM Sans
+| Technology | Usage |
+|------------|--------|
+| HTML5 | Semantic Structure |
+| CSS3 | Styling & Animations |
+| JavaScript (ES6) | Interactivity |
+| Lucide Icons | SVG Icons |
+| Google Fonts | Typography |
 
 ---
 
-## 📁 Project Structure
+## 📂 Project Structure
 
 ```bash
-
-Restaurant_Food_Delivery_Website_landing_page/
+SwiftEats/
 │
-├── index.html # Main HTML file
-├── style.css # All styles (800+ lines)
-├── script.js # All interactions (150+ lines)
+├── index.html
+├── style.css
+├── script.js
 │
-├── 📸 Screenshots/
-│ ├── home.png
-│ ├── why choose.png
-│ ├── menu.png
-│ ├── how it works.png
-│ ├── what foodies say.png
-│ ├── FAQ.png
-│ ├── contact.png
-│ ├── ordering.png
-│ └── footer.png
+├── home.png
+├── why choose.png
+├── menu.png
+├── how it works.png
+├── what foodies say.png
+├── FAQ.png
+├── contact.png
+├── ordering.png
+├── footer.png
 │
-└── README.md # Documentation
+└── README.md
 ```
-
-
-
-> ⚠️ Make sure all files are in the **same folder** as `index.html`
 
 ---
 
 ## 🚀 Getting Started
 
-### 1. Clone the repository
+### Clone Repository
 
 ```bash
-
-git clone https://github.com/yourusername/Restaurant_Food_Delivery_Website_landing_page.git
+git clone https://github.com/yourusername/swifteats.git
 ```
-### 2. Navigate into folder
+
+### Navigate Into Project
+
 ```bash
-cd Restaurant_Food_Delivery_Website_landing_page
+cd swifteats
 ```
-### 3. Run project
 
-Open index.html in your browser
-OR use Live Server (VS Code)
+### Run Project
+
+Simply open:
+
+```bash
+index.html
+```
+
+Or use VS Code Live Server.
+
+---
 
 ## 🎨 Customization
-### Colors (style.css)
-```bash
-:root {
-  --orange: #F97316;
-  --orange-dark: #EA580C;
-  --dark: #0F172A;
-  --muted: #6B7280;
+
+### Change Theme Colors
+
+```css
+:root{
+  --orange:#F97316;
+  --orange-dark:#EA580C;
+  --dark:#0F172A;
+  --muted:#6B7280;
 }
 ```
 
 ### Update Content
-- Menu items → .dish-card
-- FAQ → .faq-item
-- Contact info → .contact-card
-- Images → replace in Screenshots/
+
+- Menu items → `.dish-card`
+- FAQ items → `.faq-item`
+- Contact cards → `.contact-card`
+- Hero stats → `.stat`
+- Testimonials → `.testi-card`
+
+---
 
 ## 📱 Responsive Breakpoints
 
-- **≥ 1024px** → Desktop layout  
-- **768px – 1024px** → Tablet layout  
-- **< 768px** → Mobile layout  
-- **< 480px** → Compact mobile layout  
+| Device | Width |
+|----------|----------|
+| Desktop | ≥ 1024px |
+| Tablet | 768px – 1024px |
+| Mobile | < 768px |
+| Small Mobile | < 480px |
 
 ---
 
-## 🔧 JavaScript Features
+## ⚡ JavaScript Functionality
 
-- Navbar scroll highlight  
-- FAQ accordion  
-- Menu filtering system  
-- Toast notifications  
-- Scroll animations (Intersection Observer)  
-- Page loader  
+- Loader Animation
+- Sticky Navbar
+- Active Navigation Highlight
+- FAQ Accordion
+- Menu Filtering
+- Toast Notifications
+- Back-To-Top Button
+- Intersection Observer Animations
+- Smooth Scrolling
 
 ---
 
-## 🚨 Browser Support
+## 🌍 Browser Support
 
-- Chrome (latest)  
-- Firefox (latest)  
-- Safari  
-- Edge  
-- Mobile browsers (iOS / Android)  
+✅ Chrome
+
+✅ Firefox
+
+✅ Safari
+
+✅ Microsoft Edge
+
+✅ Android Browsers
+
+✅ iOS Browsers
 
 ---
 
 ## 📄 License
 
-MIT License – Free to use, modify, and distribute.
+This project is licensed under the MIT License.
+
+Feel free to use, modify, and distribute.
 
 ---
 
-## 🙌 Acknowledgments
+## 🙌 Credits
 
-- Unsplash – High-quality food images  
-- Lucide – Clean SVG icon set  
-- Google Fonts – Typography resources  
+- Lucide Icons
+- Google Fonts
+- Unsplash Food Photography
+
+---
+
+## ⭐ Support
+
+If you like this project, consider giving it a ⭐ on GitHub.
+
