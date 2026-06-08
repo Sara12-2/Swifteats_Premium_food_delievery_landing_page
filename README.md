@@ -145,7 +145,7 @@ SwiftEats/
 ### Clone Repository
 
 ```bash
-git clone https://github.com/yourusername/swifteats.git
+git clone https://github.com/Sara12-2/Swifteats_Premium_food_delievery_landing_page
 ```
 
 ### Navigate Into Project
